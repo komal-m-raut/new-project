@@ -7,13 +7,17 @@ import { H6 } from "../Typography";
 type Props = TextFieldProps & BoxProps;
 // ==============================================================
 
-const MoreShopTextField: FC<Props> = ({ label, InputProps, ...props }) => {
-  const boxProps: BoxProps = {};
-  const textFieldProps: TextFieldProps = {};
+const MoreShopTextField: FC<Props> = ({
+  label,
+  InputProps,
+  ...props
+}: Props & Record<string, any>) => {
+  const boxProps: Partial<BoxProps> = {};
+  const textFieldProps: Partial<TextFieldProps> = {};
 
   for (const key in props) {
-    if (SPACE_PROPS_LIST.includes(key)) boxProps[key] = props[key];
-    else textFieldProps[key] = props[key];
+    if (SPACE_PROPS_LIST.includes(key)) (boxProps as any)[key] = props[key];
+    else (textFieldProps as any)[key] = props[key];
   }
 
   return (
